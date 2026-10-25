@@ -1,31 +1,40 @@
-# TFT Unit Journey
+<div align="center">
+  <h1>🧭 TFT Unit Journey</h1>
+  <p><strong>Uma linha do tempo da sua experiência com cada unidade em Teamfight Tactics.</strong></p>
+  <p><img alt="Status" src="https://img.shields.io/badge/status-concep%C3%A7%C3%A3o-64748b"></p>
+</div>
 
-**Ideia de produto independente para Teamfight Tactics: visualizar a história do jogador com diferentes unidades.**
+> **Ideia documentada, ainda sem código executável.** O repositório contém somente o README nesta revisão.
 
-![Status](https://img.shields.io/badge/status-concepção-64748b)
+## Qual é a proposta?
 
-## O problema que queremos resolver
+Em vez de olhar para uma composição inteira, o **Unit Journey** propõe explorar a história pessoal de uma **unidade específica** ao longo das partidas em que ela apareceu: frequência, itens associados e resultados da amostra.
 
-Ferramentas genéricas mostram muitos números, mas nem sempre ajudam o jogador a transformar seu histórico ou suas anotações em uma próxima ação clara. O objetivo deste projeto é construir uma experiência especializada e fácil de usar.
+## Fluxo planejado
 
-## Experiência proposta
+1. Escolher um Set, patch e unidade.
+2. Consultar partidas fornecidas por uma fonte autorizada ou importar dados de teste.
+3. Observar frequência, itens, composições e resultados.
+4. Comparar períodos disponíveis e salvar uma reflexão.
 
-Escolher uma unidade e explorar frequência, itens e resultados recentes.
+| Informação | Cuidado na leitura |
+| --- | --- |
+| Unidade e versão do Set | O mesmo nome pode ter funções diferentes entre Sets |
+| Partidas com a unidade | Somente a amostra consultada |
+| Itens | Nem sempre representam o estado de todos os estágios |
+| Colocação | É resultado do tabuleiro inteiro, não da unidade isolada |
+| Datas e patches | Precisam ser conhecidos e atualizados |
 
-## Estado atual
+## Primeiro MVP
 
-**Somente planejamento:** nesta revisão, o repositório contém documentação, sem aplicação ou serviço executável. O fluxo descrito acima é **uma proposta**, não uma funcionalidade já entregue.
+Começar com **dados demonstrativos identificados**, seleção de unidade, lista de aparições e filtros de Set/patch. Depois validar se a apresentação ajuda o jogador a entender sua própria história.
 
-## Primeiro marco
+**Critério de conclusão:** o usuário consegue comparar duas unidades de um mesmo Set, identificar de onde vêm as métricas e reconhecer quando os dados são insuficientes.
 
-Definir métricas e limitações da amostra histórica.
+## Limites
 
-Antes de expandir, o MVP deve demonstrar seu fluxo principal, funcionar em dispositivos móveis e ter testes básicos. Integrações, autenticação e persistência serão decididas conforme a necessidade real, sem prometer suporte antecipadamente.
+Não existe ainda integração Riot, conta autenticada ou timeline de unidades operante. Uma API de histórico final pode não permitir reconstruir exatamente quando cada unidade foi comprada, vendida ou posicionada.
 
-## Portfólio e referências
+Relacionado ao [Ideias IA Lab](https://github.com/HelioConde/ideias-ia-lab). Projeto independente, não afiliado à Riot Games.
 
-Este experimento integra o [Ideias IA Lab](https://github.com/HelioConde/ideias-ia-lab). O código do produto deve permanecer neste repositório quando o desenvolvimento começar.
-
-> Teamfight Tactics e seus elementos pertencem aos respectivos titulares. Este é um projeto independente, não oficial.
-
-Autor: [Hélio Conde](https://github.com/HelioConde).
+Criado por [Hélio Conde](https://github.com/HelioConde).
