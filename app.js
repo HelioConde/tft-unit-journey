@@ -78,6 +78,33 @@ function renderGroups(){
   }
   if(config.metric)container.append(newNode("p","insights-warning","As médias vêm de anotações manuais e amostras pequenas. Compare apenas dentro do mesmo Set e patch; a colocação é do tabuleiro inteiro."));
 }
+function renderComparison(){
+ const context=$("#compare-context"),left=$("#compare-left"),right=$("#compare-right"),out=$("#compare-results");
+ const contexts=[...new Set(records.map(r=>r.set+"\u241f"+r.patch))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+ const chosen=contexts.includes(context.value)?context.value:(contexts[0]||"");
+ context.replaceChildren();if(!contexts.length){const o=newNode("option","","Sem partidas registradas");o.value="";context.append(o);}
+ else for(const key of contexts){const o=newNode("option","",key.split("\u241f").join(" · "));o.value=key;context.append(o);}
+ context.value=chosen;
+ const matches=records.filter(r=>r.set+"\u241f"+r.patch===chosen);
+ const names=[...new Set(matches.map(r=>r.unit))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+ const previousA=left.value,previousB=right.value;
+ for(const [select,preferred] of [[left,previousA],[right,previousB]]){
+  select.replaceChildren();for(const name of names){const o=newNode("option","",name);o.value=name;select.append(o);}
+  select.value=names.includes(preferred)?preferred:(select===left?names[0]||"":names[1]||names[0]||"");
+ }
+ if(names.length>1&&right.value===left.value){right.value=names.find(x=>x!==left.value);}
+ out.replaceChildren();
+ if(names.length<2){out.append(newNode("p","compare-empty",names.length?"Registre outra unidade no mesmo Set e patch para comparar amostras.":"Adicione partidas para iniciar uma comparação."));return;}
+ for(const [select,position] of [[left,"A"],[right,"B"]]){
+  const subset=matches.filter(r=>r.unit===select.value),card=newNode("article","versus-card");
+  card.append(newNode("span","versus-label","UNIDADE "+position),newNode("h3","",select.value));
+  const value=subset.reduce((sum,r)=>sum+r.placement,0)/subset.length;
+  card.append(newNode("strong","versus-score",value.toFixed(1).replace(".",",")));
+  card.append(newNode("p","", "Colocação média do tabuleiro · "+subset.length+" partida"+(subset.length===1?"":"s")));
+  const range=newNode("p","versus-range","Colocações registradas: "+subset.map(x=>x.placement).join(", "));
+  card.append(range);out.append(card);
+ }
+}
 function recordCard(r){
  const article=newNode("article","entry-card");
  const head=newNode("div","card-head"),title=newNode("h3","",r[config.titleField]);
@@ -96,7 +123,7 @@ function recordCard(r){
  }article.append(actions);return article;
 }
 function render(){
- renderGroups();const search=elements.search.value.trim().toLocaleLowerCase("pt-BR"),group=elements.filter.value;
+ renderGroups();renderComparison();const search=elements.search.value.trim().toLocaleLowerCase("pt-BR"),group=elements.filter.value;
  const found=[...records].sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt)).filter(r=>(!group||keyOf(r)===group)&&(!search||keys.some(k=>String(r[k]).toLocaleLowerCase("pt-BR").includes(search))));
  elements.entries.replaceChildren(...found.map(recordCard));
  $("#total").textContent=records.length;
@@ -133,6 +160,9 @@ elements.entries.addEventListener("click",event=>{
 });
 elements.filter.addEventListener("change",()=>{render();});
 elements.search.addEventListener("input",()=>{render();});
+$("#compare-context").addEventListener("change",()=>renderComparison());
+$("#compare-left").addEventListener("change",()=>renderComparison());
+$("#compare-right").addEventListener("change",()=>renderComparison());
 $("#demo").addEventListener("click",()=>{
  if(records.length&&!confirm("Substituir registros por exemplos fictícios?"))return;
  records=config.demo.map((r,i)=>({...r,id:"demo-"+i+"-"+config.id,updatedAt:now()}));
