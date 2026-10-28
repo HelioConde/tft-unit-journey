@@ -28,3 +28,6 @@ Dois seletores escolhem unidades registradas no **mesmo Set e patch**. A interfa
 
 ## Auditoria de screenshots mobile (28/10/2026)
 Capturas 320/390 px revisadas. Hero e elementos decorativos comprimidos no mobile para priorizar dados e ações de produto. Link de navegação rápida continua acessível pelo teclado, recortado fora do foco. Testes incluem validação de foco e regressão responsiva em cinco resoluções.
+
+## QA de acessibilidade 28/10/2026
+Playwright testa Tab/Shift+Tab, navegação rápida para main com foco, rótulos e contraste computado de inputs e placeholders (mínimo 4,5:1), ações de toque e formulário com 44px de altura, e anel de foco. CSS em `a11y.css` mantém a identidade e os dados locais. Checagem automatizada direcionada, não certificação WCAG.

@@ -1,4 +1,5 @@
 "use strict";
+const auditAccessibility=require("./accessibility-audit.cjs");
 const {chromium}=require("playwright"),{spawn}=require("node:child_process"),fs=require("node:fs");
 fs.mkdirSync("screenshots",{recursive:true});
 const server=spawn("python3",["-m","http.server","8755","--bind","127.0.0.1"],{stdio:"ignore"});
@@ -15,6 +16,7 @@ const sleep=n=>new Promise(resolve=>setTimeout(resolve,n));
   try{
    const response=await page.goto("http://127.0.0.1:8755/",{waitUntil:"load"});if(response.status()!==200)errors.push("Home status "+response.status());
    await page.getByRole("heading",{level:1}).waitFor();
+    await auditAccessibility(page,errors);
    const skip=page.locator("a.skip,a.skip-link");
    if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
    else{const before=await skip.evaluate(el=>getComputedStyle(el).clipPath);
