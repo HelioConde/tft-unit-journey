@@ -34,3 +34,6 @@ Playwright testa Tab/Shift+Tab, navegação rápida para main com foco, rótulos
 
 ## Menu de coleção no celular
 Acesso a Comparar unidades, Álbum e Registro usando `details/summary`, até 640 px. Ícone e painel com identidade lilás do álbum colecionável. Teclado Enter/Escape e fechamento após selecionar destino. Testes Playwright nas cinco resoluções e sem alteração do backup.
+
+## Navegação desktop orientada ao produto
+Cabeçalho desktop aponta diretamente para Comparar, Álbum, Nova unidade. Teste Playwright verifica os três destinos existentes e acesso em 768/1366/1600px. Badge secundário é suprimido em telas intermediárias para evitar overflow. Menu móvel permanece independente.

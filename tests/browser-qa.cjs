@@ -17,6 +17,18 @@ const sleep=n=>new Promise(resolve=>setTimeout(resolve,n));
    const response=await page.goto("http://127.0.0.1:8755/",{waitUntil:"load"});if(response.status()!==200)errors.push("Home status "+response.status());
    await page.getByRole("heading",{level:1}).waitFor();
     await auditAccessibility(page,errors);
+   const desktopNav=page.locator("header nav.nav-links");
+   const desktopLinks=desktopNav.locator('a[href^="#"]');
+   if(await desktopLinks.count()!==3)errors.push("Desktop nav must expose three tft-unit-journey destinations");
+   for(const link of await desktopLinks.all()){
+     const id=(await link.getAttribute("href")).slice(1);
+     if(await page.locator('[id="'+id+'"]').count()!==1)errors.push("Desktop nav missing/duplicate target #"+id);
+   }
+   if(page.viewportSize().width>640){
+     if(!await desktopNav.isVisible())errors.push("Desktop nav hidden at wide viewport");
+     else{const href=await desktopLinks.first().getAttribute("href");await desktopLinks.first().click();if(await page.evaluate(()=>location.hash)!==href)errors.push("Desktop navigation did not follow anchor");}
+   }else if(await desktopNav.isVisible())errors.push("Desktop nav visible at mobile viewport");
+
    const mobileMenu=page.locator("header details.mobile-nav");
    if(page.viewportSize().width<=640){
     if(!await mobileMenu.isVisible())errors.push("Mobile catalog menu hidden");
