@@ -31,3 +31,6 @@ Capturas 320/390 px revisadas. Hero e elementos decorativos comprimidos no mobil
 
 ## QA de acessibilidade 28/10/2026
 Playwright testa Tab/Shift+Tab, navegação rápida para main com foco, rótulos e contraste computado de inputs e placeholders (mínimo 4,5:1), ações de toque e formulário com 44px de altura, e anel de foco. CSS em `a11y.css` mantém a identidade e os dados locais. Checagem automatizada direcionada, não certificação WCAG.
+
+## Menu de coleção no celular
+Acesso a Comparar unidades, Álbum e Registro usando `details/summary`, até 640 px. Ícone e painel com identidade lilás do álbum colecionável. Teclado Enter/Escape e fechamento após selecionar destino. Testes Playwright nas cinco resoluções e sem alteração do backup.

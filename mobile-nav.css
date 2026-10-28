@@ -1,0 +1,12 @@
+/* Lilac foil-collection mobile navigation. */
+.mobile-nav{display:none}
+@media(max-width:640px){
+.header .nav{gap:8px}.header .demo-pill{display:none!important}.header .brand{max-width:calc(100% - 66px);min-width:0}
+.header .mobile-nav{display:block;position:relative;z-index:90;flex:none;margin-left:auto}
+.header .mobile-nav summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:6px;min-width:58px;min-height:48px;padding:8px;background:#8b55ad;color:#fff;border:2px solid #b17bc8;border-radius:14px;font:900 11px system-ui;cursor:pointer}
+.header .mobile-nav summary::-webkit-details-marker{display:none}.header .mobile-nav summary::before{content:"☰";font-size:18px;line-height:1}.header .mobile-nav[open] summary::before{content:"×";font-size:23px}
+.header .mobile-nav .mobile-nav-panel{display:grid!important;position:absolute;right:0;top:calc(100% + 8px);z-index:91;width:min(265px,calc(100vw - 30px));padding:9px;background:#fff8fd;border:2px solid #cca5d5;border-radius:18px;box-shadow:0 9px 22px #8f5baf42}
+.header .mobile-nav-panel a{display:flex;align-items:center;min-height:48px;padding:11px 13px;text-decoration:none;border-bottom:1px solid #ead6e9;color:#5a3a74;font:850 13px system-ui;white-space:normal;border-radius:6px}
+.header .mobile-nav-panel a:hover{background:#eee1fb}
+.header .mobile-nav :is(summary,a):focus-visible{outline:3px solid #7133af!important;outline-offset:3px}
+}

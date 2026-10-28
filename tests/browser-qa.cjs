@@ -17,6 +17,18 @@ const sleep=n=>new Promise(resolve=>setTimeout(resolve,n));
    const response=await page.goto("http://127.0.0.1:8755/",{waitUntil:"load"});if(response.status()!==200)errors.push("Home status "+response.status());
    await page.getByRole("heading",{level:1}).waitFor();
     await auditAccessibility(page,errors);
+   const mobileMenu=page.locator("header details.mobile-nav");
+   if(page.viewportSize().width<=640){
+    if(!await mobileMenu.isVisible())errors.push("Mobile catalog menu hidden");
+    const summary=mobileMenu.locator("summary");await summary.focus();await page.keyboard.press("Enter");
+    if(!await mobileMenu.evaluate(el=>el.open))errors.push("Mobile catalog not opened with Enter");
+    if(await mobileMenu.locator("nav a").count()!==3)errors.push("Mobile catalog missing links");
+    await page.keyboard.press("Escape");if(await mobileMenu.evaluate(el=>el.open))errors.push("Escape did not close catalog");
+    await summary.click();const href=await mobileMenu.locator("nav a").first().getAttribute("href");await mobileMenu.locator("nav a").first().click();
+    if(await mobileMenu.evaluate(el=>el.open))errors.push("Catalog menu stays open after selecting");
+    if(await page.evaluate(()=>location.hash)!==href)errors.push("Catalog mobile destination wrong");
+   }else if(await mobileMenu.isVisible())errors.push("Catalog menu visible on desktop");
+
    const skip=page.locator("a.skip,a.skip-link");
    if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
    else{const before=await skip.evaluate(el=>getComputedStyle(el).clipPath);
