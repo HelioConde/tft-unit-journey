@@ -22,3 +22,6 @@ GitHub Actions executa testes estáticos e Playwright em 320, 390, 768, 1366, 16
 
 ## Diferenciação visual — 27/10/2026
 **Layout original do produto, não tema copiado.** Álbum de colecionador de unidades: cartões tipo figurinha em três colunas, foil pastel e vitrine celeste. O arquivo `identity.css` contém a identidade sem alterar armazenamento ou componentes funcionais. Resoluções críticas: 320, 390, 768, 1366 e 1600 pixels. Contraste/foco mantidos e movimento reduzido respeitado.
+
+## Comparação de unidades — recurso exclusivo
+Dois seletores escolhem unidades registradas no **mesmo Set e patch**. A interface exibe o número de partidas e a média de colocação do **tabuleiro**; não é tier list, previsão ou desempenho isolado. Dados opcionais são somente manuais. Sem alterar o schema LocalStorage. Playwright verifica os dois cartões após recarregar a página.

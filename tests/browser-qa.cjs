@@ -21,6 +21,8 @@ const sleep=n=>new Promise(resolve=>setTimeout(resolve,n));
    if(await page.locator("#entries article").count()!==expected)errors.push("Demo count");
    await page.reload();
    if(await page.locator("#entries article").count()!==expected)errors.push("LocalStorage did not persist");
+   if(await page.locator("#compare-results .versus-card").count()!==2)errors.push("Two-unit same-patch comparison missing");
+   if(await page.locator("#compare-results .versus-score").count()!==2)errors.push("Comparison placements missing");
    await page.locator("#entries article").first().getByRole("button",{name:"Editar"}).click();
    const input=page.locator("#field-"+await page.locator("body").getAttribute("data-primary-field"));
    const original=await input.inputValue();await input.fill(original+" teste");
