@@ -19,3 +19,6 @@ Cada registro é validado conforme os campos do produto; backups versionados `{a
 
 ## QA e GitHub Pages
 GitHub Actions executa testes estáticos e Playwright em 320, 390, 768, 1366, 1600 px, capturas de página inteira, fluxos de exemplos, edição, persistência, exportação, exclusão e overflow. Publicação estática por `gh-pages/(root)` sem build de runtime; a configuração de Pages da conta pode exigir habilitação manual.
+
+## Diferenciação visual — 27/10/2026
+**Layout original do produto, não tema copiado.** Álbum de colecionador de unidades: cartões tipo figurinha em três colunas, foil pastel e vitrine celeste. O arquivo `identity.css` contém a identidade sem alterar armazenamento ou componentes funcionais. Resoluções críticas: 320, 390, 768, 1366 e 1600 pixels. Contraste/foco mantidos e movimento reduzido respeitado.
