@@ -15,6 +15,13 @@ const sleep=n=>new Promise(resolve=>setTimeout(resolve,n));
   try{
    const response=await page.goto("http://127.0.0.1:8755/",{waitUntil:"load"});if(response.status()!==200)errors.push("Home status "+response.status());
    await page.getByRole("heading",{level:1}).waitFor();
+   const skip=page.locator("a.skip,a.skip-link");
+   if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
+   else{const before=await skip.evaluate(el=>getComputedStyle(el).clipPath);
+     if(!before.includes("inset"))errors.push("Skip link not clipped at rest");
+     await skip.focus();if(await skip.evaluate(el=>getComputedStyle(el).clipPath)!=="none")errors.push("Skip link not visible on keyboard focus");
+     await skip.evaluate(el=>el.blur());}
+
    if(await page.locator("#entries article").count()!==0)errors.push("First visit must be empty");
    await page.getByRole("button",{name:/Carregar exemplos/i}).click();
    const expected=Number(await page.locator("body").getAttribute("data-demo-count"));

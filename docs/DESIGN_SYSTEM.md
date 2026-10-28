@@ -25,3 +25,6 @@ GitHub Actions executa testes estáticos e Playwright em 320, 390, 768, 1366, 16
 
 ## Comparação de unidades — recurso exclusivo
 Dois seletores escolhem unidades registradas no **mesmo Set e patch**. A interface exibe o número de partidas e a média de colocação do **tabuleiro**; não é tier list, previsão ou desempenho isolado. Dados opcionais são somente manuais. Sem alterar o schema LocalStorage. Playwright verifica os dois cartões após recarregar a página.
+
+## Auditoria de screenshots mobile (28/10/2026)
+Capturas 320/390 px revisadas. Hero e elementos decorativos comprimidos no mobile para priorizar dados e ações de produto. Link de navegação rápida continua acessível pelo teclado, recortado fora do foco. Testes incluem validação de foco e regressão responsiva em cinco resoluções.
