@@ -4,7 +4,7 @@
 :where(button,a.button,.hero-buttons a,header nav a,header .nav-links a){min-height:44px}
 header nav a,header .nav-links a{display:inline-flex;align-items:center}
 form :is(input:not([type="hidden"]):not([type="file"]),select,textarea){min-height:44px;font-size:16px}
-form :is(input,textarea)::placeholder{color:var(--a11y-placeholder);opacity:1}
+form :is(input,textarea)::placeholder{color:var(--a11y-placeholder)!important;opacity:1!important}
 form :is(input,select,textarea){max-width:100%}
 form :is(.field,.input-group){min-width:0}
 main:focus{outline:none}
